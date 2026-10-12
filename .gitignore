@@ -11,6 +11,4 @@
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-
-
-
+/certificates.backup/

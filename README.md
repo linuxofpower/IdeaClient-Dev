@@ -1,3 +1,19 @@
+# IdeaClient — Development
+
+**DEV:** [linuxofpower/IdeaClient-Dev](https://github.com/linuxofpower/IdeaClient-Dev), branch `main`.
+
+**Source / current production-side repository:** [yaMorozYaroslav/IdeaCliDev](https://github.com/yaMorozYaroslav/IdeaCliDev), branch `master`. This older repository name remains unchanged; any future production rename requires a separate approved action.
+
+This is the **same application** in two stages. Implement and verify features in DEV. The production owner (`yaMorozYaroslav`) alone accepts/rejects pull requests and merges to production. Do not push directly to production or configure automatic production deployment from DEV. Development and production have separate Git histories.
+
+**Migration:** source snapshot `50dc396a79d2e4e481673df9e38996fa07a69c62`; all 72 non-certificate tracked files match the original SHA-1 Git blobs exactly. Intentionally omitted local TLS files `certificates.backup/localhost-key.pem` and `certificates.backup/localhost.pem`. Do **not** restore them, or commit secrets or private keys.
+
+**DEV CI:** [workflow](.github/workflows/ci.yml), runs on `main` pushes and pull requests. CI must never deploy production.
+
+---
+
+## Original application README
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
