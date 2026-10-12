@@ -22,7 +22,8 @@ jobs:
         run: corepack enable
       - name: Install locked dependencies
         run: yarn install --immutable
-      - name: Run unit tests
-        run: yarn test --watch=false
       - name: Build Next.js client
         run: yarn build
+      - name: Run unit tests
+        if: success() || failure()
+        run: yarn test --watch=false
