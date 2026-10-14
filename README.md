@@ -2,7 +2,7 @@
 
 **DEV:** [linuxofpower/IdeaClient-Dev](https://github.com/linuxofpower/IdeaClient-Dev), branch `main`.
 
-**Source / current production-side repository:** [yaMorozYaroslav/IdeaCliDev](https://github.com/yaMorozYaroslav/IdeaCliDev), branch `master`. This older repository name remains unchanged; any future production rename requires a separate approved action.
+**Source / current production-side repository:** [yaMorozYaroslav/IdeaCliDev-relocate-](https://github.com/yaMorozYaroslav/IdeaCliDev-relocate-), branch `master`. This older repository name remains unchanged; any future production rename requires a separate approved action.
 
 This is the **same application** in two stages. Implement and verify features in DEV. The production owner (`yaMorozYaroslav`) alone accepts/rejects pull requests and merges to production. Do not push directly to production or configure automatic production deployment from DEV. Development and production have separate Git histories.
 
