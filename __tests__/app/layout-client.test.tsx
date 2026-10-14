@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import { render, screen, waitFor, act } from "@testing-library/react";
 
 // --- Mocks ---
-jest.mock("../../comps/Header", () => ({ user }: { user: any }) => (
+jest.mock("../../app/main-comps/Header", () => ({ user }: { user: any }) => (
   <div data-testid="header">{user?.name ?? "NoUser"}</div>
 ));
 
