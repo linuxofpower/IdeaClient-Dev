@@ -57,7 +57,7 @@ describe("Header component", () => {
   });
 
   it("renders user from props", () => {
-    render(<Header user={{ name: "Yaro", picture: "/avatar.png" }} />);
+    render(<Header user={{ name: "Yaro", userId: "test-user", picture: "/avatar.png" }} />);
     expect(screen.getByText("Yaro")).toBeInTheDocument();
     expect(screen.getByAltText("Yaro")).toHaveAttribute("src", "/avatar.png");
   });
@@ -80,7 +80,7 @@ describe("Header component", () => {
   });
 
   it("logs out and reloads the page", async () => {
-    render(<Header user={{ name: "Yaro" }} />);
+    render(<Header user={{ name: "Yaro", userId: "test-user" }} />);
     fireEvent.click(screen.getByRole("button", { name: /logout/i }));
 
     await waitFor(() => {
