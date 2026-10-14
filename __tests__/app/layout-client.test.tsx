@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import { render, screen, waitFor, act } from "@testing-library/react";
 
 // --- Mocks ---
-jest.mock("../../comps/Header", () => ({ user }: { user: any }) => (
+jest.mock("../../app/main-comps/Header", () => ({ user }: { user: any }) => (
   <div data-testid="header">{user?.name ?? "NoUser"}</div>
 ));
 
@@ -87,7 +87,7 @@ beforeEach(() => {
   capturedVisibility = null;
 
   // default cookie state
-  cookieStore["user_data"] = JSON.stringify({ name: "Cookie User" });
+  cookieStore["user_data"] = JSON.stringify({ name: "Cookie User", userId: "cookie-user" });
 
   // Default fetch: ok with userData for /api/refresh, ok empty for store-tokens
   // @ts-ignore
@@ -96,7 +96,7 @@ beforeEach(() => {
     if (url.includes("/api/refresh")) {
       return {
         ok: true,
-        json: async () => ({ userData: { name: "FromRefresh" } }),
+        json: async () => ({ userData: { name: "FromRefresh", userId: "refresh-user" } }),
       } as any;
     }
     if (url.includes("/api/store-tokens")) {
@@ -114,7 +114,7 @@ afterEach(() => {
 
 import LayoutClient from "../../app/layout-client";
 
-const renderUI = (initialUser = { name: "Initial User" }) =>
+const renderUI = (initialUser = { name: "Initial User", userId: "initial-user" }) =>
   render(
     <LayoutClient user={initialUser}>
       <div data-testid="content">Test Content</div>
@@ -150,7 +150,7 @@ describe("LayoutClient full behavior", () => {
     // Cookie should be updated with userData
     expect(Cookies.set).toHaveBeenCalledWith(
       "user_data",
-      JSON.stringify({ name: "FromRefresh" }),
+      JSON.stringify({ name: "FromRefresh", userId: "refresh-user" }),
       { path: "/" }
     );
   });
@@ -168,12 +168,11 @@ describe("LayoutClient full behavior", () => {
       return { ok: true, json: async () => ({}) } as any;
     });
 
-    renderUI({ name: "Initial User" });
+    renderUI({ name: "Initial User", userId: "initial-user" });
 
     await waitFor(() => expect(screen.getByTestId("header")).toBeInTheDocument());
-    // Keeps initial user when cookie parse fails and no userData
-    expect(screen.getByTestId("header")).toHaveTextContent("Initial User");
-    expect(console.warn).toHaveBeenCalled();
+    // An invalid cookie cannot authenticate a user; an empty refresh clears prior state.
+    await waitFor(() => expect(screen.getByTestId("header")).toHaveTextContent("NoUser"));
   });
 
   it("handles SET_TOKENS postMessage: posts to /api/store-tokens", async () => {

@@ -32,6 +32,7 @@ module.exports = {
   transformIgnorePatterns: ["/node_modules/(?!(styled-components)/)"],
 
   moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/$1",
     "^.+\\.module\\.(css|scss|sass)$": "identity-obj-proxy",
     "^.+\\.(jpg|jpeg|png|svg|gif|webp|avif)$": "<rootDir>/__mocks__/fileMock.js",
   },
